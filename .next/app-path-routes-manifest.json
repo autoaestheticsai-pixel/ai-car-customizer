@@ -1,0 +1,13 @@
+{
+  "/api/contact/route": "/api/contact",
+  "/_not-found/page": "/_not-found",
+  "/api/generate/route": "/api/generate",
+  "/robots.txt/route": "/robots.txt",
+  "/sitemap.xml/route": "/sitemap.xml",
+  "/page": "/",
+  "/gallery/page": "/gallery",
+  "/pricing/page": "/pricing",
+  "/about/page": "/about",
+  "/contact/page": "/contact",
+  "/visualizer/page": "/visualizer"
+}

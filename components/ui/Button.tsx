@@ -1,9 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import MotionButton from './MotionButton'
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'onDrag' | 'onDragStart' | 'onDragEnd'> {
   variant?: 'primary' | 'secondary' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   children: React.ReactNode
@@ -31,13 +31,11 @@ export function Button({
   }
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+    <MotionButton
       className={cn(baseClasses, variants[variant], sizes[size], className)}
       {...props}
     >
       {children}
-    </motion.button>
+    </MotionButton>
   )
 }

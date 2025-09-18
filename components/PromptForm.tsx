@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Wand2 } from 'lucide-react'
+import MotionButton from '@/components/ui/MotionButton'
 
 interface PromptFormProps {
   value: string
@@ -36,11 +36,9 @@ export function PromptForm({ value, onChange, onSubmit, isGenerating, className 
 
 
       {/* Generate Button */}
-      <motion.button
+      <MotionButton
         onClick={onSubmit}
         disabled={!value.trim() || isGenerating}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
         className="w-full glow-button magnetic disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
       >
         {isGenerating ? (
@@ -54,7 +52,7 @@ export function PromptForm({ value, onChange, onSubmit, isGenerating, className 
             <span>Generate</span>
           </>
         )}
-      </motion.button>
+      </MotionButton>
     </div>
   )
 }
