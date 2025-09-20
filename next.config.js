@@ -14,6 +14,12 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
   },
+  // Configure API body size limit for larger image uploads
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // increase upload limit to 10MB
+    },
+  },
   // Ensure proper headers for security
   async headers() {
     return [
