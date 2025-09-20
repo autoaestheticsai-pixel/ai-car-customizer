@@ -12,8 +12,8 @@ export default async function handler(req, res) {
     const API_KEY = process.env.GEMINI_API_KEY;
     
     if (!API_KEY) {
-      return res.status(500).json({ 
-        error: 'GEMINI_API_KEY not found in environment variables' 
+      return res.status(400).json({ 
+        error: "Missing GEMINI API key" 
       });
     }
 
@@ -38,9 +38,10 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error("Generation API error:", error);
+    console.error("API error:", error);
     res.status(500).json({ 
-      error: error.message || "Internal Server Error" 
+      error: "Failed to generate image",
+      details: error.message 
     });
   }
 }
