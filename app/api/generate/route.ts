@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenAI, Modality } from '@google/genai'
 
+// Helper function to convert File to base64
+async function fileToBase64(file: File): Promise<string> {
+  const arrayBuffer = await file.arrayBuffer()
+  const base64 = Buffer.from(arrayBuffer).toString('base64')
+  return base64
+}
+
 const API_KEY = process.env.GEMINI_API_KEY
 
 if (!API_KEY) {
@@ -21,12 +28,43 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    const body = await request.json()
-    const { originalImageBase64, prompt, referenceImageBase64 } = body
+    // Parse FormData instead of JSON
+    let formData: FormData
+    let carImageFile: File
+    let prompt: string
+    let referenceImageFile: File | null
 
-    if (!originalImageBase64 || !prompt) {
+    try {
+      formData = await request.formData()
+      carImageFile = formData.get('image') as File
+      prompt = formData.get('prompt') as string
+      referenceImageFile = formData.get('reference') as File | null
+    } catch (error) {
+      console.error('FormData parsing error:', error)
       return NextResponse.json(
-        { error: 'Missing required fields: originalImageBase64 and prompt' },
+        { error: 'Invalid request format. Expected FormData.' },
+        { status: 400 }
+      )
+    }
+
+    if (!carImageFile || !prompt) {
+      return NextResponse.json(
+        { error: 'Missing required fields: image and prompt' },
+        { status: 400 }
+      )
+    }
+
+    // Convert files to base64
+    let originalImageBase64: string
+    let referenceImageBase64: string | null
+
+    try {
+      originalImageBase64 = await fileToBase64(carImageFile)
+      referenceImageBase64 = referenceImageFile ? await fileToBase64(referenceImageFile) : null
+    } catch (error) {
+      console.error('File conversion error:', error)
+      return NextResponse.json(
+        { error: 'Failed to process uploaded images' },
         { status: 400 }
       )
     }
