@@ -145,7 +145,7 @@ export default function VisualizerPage() {
           className="text-center mb-12"
         >
           <h1 className="font-display font-bold text-4xl md:text-5xl text-white mb-4">
-            AI Car Visualizer
+            The AI Car Visualizer
           </h1>
           <p className="text-xl text-brand-metal max-w-2xl mx-auto">
             Upload your car, describe your vision, and watch AI bring it to life
