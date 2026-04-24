@@ -1,3 +1,11 @@
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+};
+
 const SYSTEM_PROMPT = `You are an expert automotive assistant.
 You remember the conversation and maintain context.
 You specialize in cars, modifications, performance, pricing, troubleshooting, and recommendations.
