@@ -7,6 +7,7 @@ import { ArrowRight, Upload, Wand2, Download, Shield, Eye, Sparkles, Zap, Brain,
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { AnimatedSection, StaggeredAnimation } from '@/components/AnimatedSection'
+import CarChatbot from '@/components/CarChatbot'
 
 export default function HomePage() {
   const features = [
@@ -281,6 +282,8 @@ export default function HomePage() {
           </AnimatedSection>
         </div>
       </section>
+
+      <CarChatbot />
     </div>
   )
 }
